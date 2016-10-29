@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Library {
+
     public partial class LibraryForm : Form {
 
         private BookService _bookService;
@@ -24,13 +25,19 @@ namespace Library {
             InitializeComponent();
             
             RepositoryFactory repoFactory = new RepositoryFactory();
-
             _bookService = new BookService(repoFactory);
             _bookCopyService = new BookCopyService(repoFactory);
             _loanService = new LoanService(repoFactory);
             _authorService = new AuthorService(repoFactory);
             _memberService = new MemberService(repoFactory);
+            _bookService.Updated += _bookService_Updated; //subscribes to event and calls _bookService_Updated-method
 
+        }
+
+        private void _bookService_Updated(object sender, EventArgs e)
+        {
+            books_listbox.Items.Clear();
+            ListAllBooks();
         }
 
         private void ListAllBooks() {
@@ -39,23 +46,35 @@ namespace Library {
             }
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void booksAdd_btn_Click(object sender, EventArgs e)
         {
-            _bookService.AddNewBook("jonas book", new Author(), "good stuff!", 417 );
-            var form = new PopupForm();
+            var form = new AddBookForm(_bookService, _bookCopyService, _authorService);
             form.Show(this);
-            //TODO: KEEP IMPLEMENTING THE POPUPFORM!!!!
-            //adds into database but does not write out. I suspect its missing some good authorInfo =)
         }
 
         private void LibraryForm_Load(object sender, EventArgs e)
         {
             ListAllBooks();
         }
+
+        private void removeBook_btn_Click(object sender, EventArgs e)
+        {
+
+            Book selectedBook = (Book) books_listbox.SelectedItem;
+            _bookService.RemoveBook(selectedBook);
+        }
+
+        private void books_listbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editBook_btn_Click(object sender, EventArgs e)
+        {
+            var form = new EditBookForm(_bookService, _authorService, _bookCopyService);
+            form.Show(this); 
+        }
     }
+
+
 }

@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBookForm.Designer.cs">
+      <DependentUpon>EditBookForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LibraryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +76,11 @@
     <Compile Include="Models\LibraryDbInit.cs" />
     <Compile Include="Models\Loan.cs" />
     <Compile Include="Models\Member.cs" />
-    <Compile Include="PopupForm.cs">
+    <Compile Include="AddBookForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PopupForm.Designer.cs">
-      <DependentUpon>PopupForm.cs</DependentUpon>
+    <Compile Include="AddBookForm.Designer.cs">
+      <DependentUpon>AddBookForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,11 +99,14 @@
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\LoanService.cs" />
     <Compile Include="Services\MemberService.cs" />
+    <EmbeddedResource Include="EditBookForm.resx">
+      <DependentUpon>EditBookForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LibraryForm.resx">
       <DependentUpon>LibraryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PopupForm.resx">
-      <DependentUpon>PopupForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddBookForm.resx">
+      <DependentUpon>AddBookForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

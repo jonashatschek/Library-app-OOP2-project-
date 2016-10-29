@@ -15,6 +15,7 @@ namespace Library.Repositories {
         public void Add(Book item)
         {
             _context.Books.Add(item);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Book> All() {
@@ -24,12 +25,12 @@ namespace Library.Repositories {
         public void Edit(Book item)
         {
             var query = from b in _context.Books
-                        where b.BookId == item.BookId
+                        where b.Id == item.Id
                         select b;
 
             foreach (Book book in query)
             {
-                book.BookId = item.BookId;
+                book.Id = item.Id;
                 book.BookAuthor = item.BookAuthor;
                 book.BookDescription = item.BookDescription;
                 book.BookIsbn = item.BookIsbn;
@@ -49,6 +50,7 @@ namespace Library.Repositories {
         public void Remove(Book item)
         {
             _context.Books.Remove(item);
+            _context.SaveChanges();
         }
 
     }

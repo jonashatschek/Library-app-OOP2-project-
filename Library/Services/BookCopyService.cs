@@ -3,7 +3,7 @@ using Library.Repositories;
 
 namespace Library.Services
 {
-    class BookCopyService : IService
+    public class BookCopyService : IService
     {
         BookCopyRepository _bookCopyRepository;
 

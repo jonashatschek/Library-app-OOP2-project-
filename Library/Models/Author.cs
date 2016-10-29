@@ -6,12 +6,11 @@ namespace Library.Models
     public class Author
     {
         [Key]
-        public int AuthorId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string AuthorName { get; set; }
 
-        [Required]
         public virtual ICollection<Book> Books { get; set; }
 
     }

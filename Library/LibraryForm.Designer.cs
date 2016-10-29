@@ -54,6 +54,7 @@
             this.books_listbox.Name = "books_listbox";
             this.books_listbox.Size = new System.Drawing.Size(275, 388);
             this.books_listbox.TabIndex = 0;
+            this.books_listbox.SelectedIndexChanged += new System.EventHandler(this.books_listbox_SelectedIndexChanged);
             // 
             // tabPageForm
             // 
@@ -91,6 +92,7 @@
             this.removeBook_btn.TabIndex = 3;
             this.removeBook_btn.Text = "Remove book";
             this.removeBook_btn.UseVisualStyleBackColor = true;
+            this.removeBook_btn.Click += new System.EventHandler(this.removeBook_btn_Click);
             // 
             // editBook_btn
             // 
@@ -100,10 +102,11 @@
             this.editBook_btn.TabIndex = 2;
             this.editBook_btn.Text = "Edit book";
             this.editBook_btn.UseVisualStyleBackColor = true;
+            this.editBook_btn.Click += new System.EventHandler(this.editBook_btn_Click);
             // 
             // booksAdd_btn
             // 
-            this.booksAdd_btn.Location = new System.Drawing.Point(397, 61);
+            this.booksAdd_btn.Location = new System.Drawing.Point(397, 81);
             this.booksAdd_btn.Name = "booksAdd_btn";
             this.booksAdd_btn.Size = new System.Drawing.Size(108, 36);
             this.booksAdd_btn.TabIndex = 1;
@@ -118,7 +121,7 @@
             this.authors_tabPage.Location = new System.Drawing.Point(4, 59);
             this.authors_tabPage.Name = "authors_tabPage";
             this.authors_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.authors_tabPage.Size = new System.Drawing.Size(971, 403);
+            this.authors_tabPage.Size = new System.Drawing.Size(971, 418);
             this.authors_tabPage.TabIndex = 1;
             this.authors_tabPage.Text = "Authors";
             // 
@@ -138,7 +141,7 @@
             this.loans_tabPage.Location = new System.Drawing.Point(4, 59);
             this.loans_tabPage.Name = "loans_tabPage";
             this.loans_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.loans_tabPage.Size = new System.Drawing.Size(971, 403);
+            this.loans_tabPage.Size = new System.Drawing.Size(971, 418);
             this.loans_tabPage.TabIndex = 2;
             this.loans_tabPage.Text = "Loans";
             // 
@@ -158,7 +161,7 @@
             this.members_tabPage.Location = new System.Drawing.Point(4, 59);
             this.members_tabPage.Name = "members_tabPage";
             this.members_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.members_tabPage.Size = new System.Drawing.Size(971, 403);
+            this.members_tabPage.Size = new System.Drawing.Size(971, 418);
             this.members_tabPage.TabIndex = 3;
             this.members_tabPage.Text = "Members";
             // 
@@ -178,7 +181,7 @@
             this.bookCopies_tabPage.Location = new System.Drawing.Point(4, 59);
             this.bookCopies_tabPage.Name = "bookCopies_tabPage";
             this.bookCopies_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.bookCopies_tabPage.Size = new System.Drawing.Size(971, 403);
+            this.bookCopies_tabPage.Size = new System.Drawing.Size(971, 418);
             this.bookCopies_tabPage.TabIndex = 4;
             this.bookCopies_tabPage.Text = "Book copies";
             // 

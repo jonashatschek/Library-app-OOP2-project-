@@ -4,16 +4,17 @@ using Library.Repositories;
 
 namespace Library.Services
 {
-    class AuthorService : IService
+    public class AuthorService : IService
     {
         AuthorRepository _authorRepository;
+
 
         public AuthorService(RepositoryFactory repoFactory)
         {
             _authorRepository = repoFactory.GetAuthorRepository();
         }
 
-        public void newAuthor(Author author)
+        public void NewAuthor(Author author)
         {
             //needs some more variables.
             _authorRepository.Add(author);

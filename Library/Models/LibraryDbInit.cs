@@ -13,6 +13,8 @@ namespace Library.Models {
         protected override void Seed(LibraryContext context) {
             base.Seed(context);
 
+            LibraryContext db = new LibraryContext();
+
             Author alexDumas = new Author() {
                 AuthorName = "Alexandre Dumas"
             };
@@ -24,9 +26,10 @@ namespace Library.Models {
 
             // Add the book to the DbSet of books.
             context.Books.Add(monteCristo);
-
+            //db.Books.Add(monteCristo);
             // Persist changes to the database
             context.SaveChanges();
+            //db.SaveChanges();
         }
     }
 }

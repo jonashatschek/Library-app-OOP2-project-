@@ -4,7 +4,7 @@ using Library.Repositories;
 
 namespace Library.Services
 {
-    class LoanService : IService
+    public class LoanService : IService
     {
         LoanRepository _loanRepository;
 

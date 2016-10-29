@@ -28,12 +28,12 @@ namespace Library.Repositories
         public void Edit(Author item)
         {
             var query = from a in _context.Authors
-                        where a.AuthorId == item.AuthorId
+                        where a.Id == item.Id
                         select a;
 
             foreach (Author author in query)
             {
-                author.AuthorId = item.AuthorId;
+                author.Id = item.Id;
                 author.AuthorName = item.AuthorName;
                 author.Books = item.Books;
 
