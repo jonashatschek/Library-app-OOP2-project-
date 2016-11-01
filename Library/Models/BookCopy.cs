@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Library.Models
 {
@@ -10,6 +11,9 @@ namespace Library.Models
         [Required]
         public virtual Book Book { get; set; }
 
-
+        public override string ToString()
+        {
+            return String.Format("[{0}] -- {1}", this.BookCopyId, this.Book.BookTitle);
+        }
     }
 }

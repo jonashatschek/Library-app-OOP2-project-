@@ -53,5 +53,10 @@ namespace Library.Repositories {
             _context.SaveChanges();
         }
 
+        public IEnumerable<Book> FindBooksByAuthor(int id)
+        {
+            return _context.Books.Where(b => b.BookAuthor.Id == id);
+        }
+
     }
 }

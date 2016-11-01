@@ -26,3 +26,7 @@ C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Proje
 C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.pdb
 C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.AddBookForm.resources
 C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.EditBookForm.resources
+C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.AddNewAuthorForm.resources
+C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.AddNewMemberForm.resources
+C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.AddNewBookCopyForm.resources
+C:\Users\Jonas\Dropbox\Systemvetarprogrammet\Systemvetarprogrammet\T5\OOP2\Projekt\Library\Library\Library\obj\Debug\Library.CreateLoanForms.resources

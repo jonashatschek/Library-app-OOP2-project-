@@ -58,6 +58,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewAuthorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewAuthorForm.Designer.cs">
+      <DependentUpon>AddNewAuthorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewBookCopyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewBookCopyForm.Designer.cs">
+      <DependentUpon>AddNewBookCopyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewMemberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewMemberForm.Designer.cs">
+      <DependentUpon>AddNewMemberForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateLoanForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateLoanForms.Designer.cs">
+      <DependentUpon>CreateLoanForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditBookForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +123,18 @@
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\LoanService.cs" />
     <Compile Include="Services\MemberService.cs" />
+    <EmbeddedResource Include="AddNewAuthorForm.resx">
+      <DependentUpon>AddNewAuthorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewBookCopyForm.resx">
+      <DependentUpon>AddNewBookCopyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewMemberForm.resx">
+      <DependentUpon>AddNewMemberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateLoanForms.resx">
+      <DependentUpon>CreateLoanForms.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditBookForm.resx">
       <DependentUpon>EditBookForm.cs</DependentUpon>
     </EmbeddedResource>

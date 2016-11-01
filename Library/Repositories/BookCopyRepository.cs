@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Library.Models;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace Library.Repositories
 {
@@ -17,7 +19,23 @@ namespace Library.Repositories
 
         public void Add(BookCopy item)
         {
-            _context.BookCopies.Add(item);
+            try
+            {
+                _context.BookCopies.Add(item);
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+            }
         }
 
         public IEnumerable<BookCopy> All()
@@ -49,6 +67,8 @@ namespace Library.Repositories
         public void Remove(BookCopy item)
         {
             _context.BookCopies.Remove(item);
+
+            _context.SaveChanges();
         }
     }
 }

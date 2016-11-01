@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Library.Models;
 using Library.Services;
 
 namespace Library
@@ -16,6 +17,7 @@ namespace Library
         private BookService _bookService;
         private BookCopyService _bookCopyService;
         private AuthorService _authorService;
+        Book _book = new Book();
 
         public AddBookForm(BookService bookservice, BookCopyService bookCopyService, AuthorService authorService)
         {
@@ -27,18 +29,18 @@ namespace Library
 
         private void booksAdd_btn_Click(object sender, EventArgs e)
         {
-            _bookService.AddNewBook(addBookTitle_textbox.Text, addBookIsbn_textbox.Text, addBookDescription_richTextBox.Text, addBookAuthor_textbox.Text);
+            _book = _bookService.AddNewBook(addBookTitle_textbox.Text, addBookIsbn_textbox.Text, addBookDescription_richTextBox.Text, addNewBookAllAuthors_comboBox.SelectedItem.ToString());
+            _bookCopyService.AddNewBookCopy(_book);
             this.Close();
         }
 
-        private void addBookAuthor_textbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void AddBookForm_Load(object sender, EventArgs e)
         {
-
+            foreach (Author author in _authorService.All())
+            {
+                addNewBookAllAuthors_comboBox.Items.Add(author);
+            }
         }
     }
     /*

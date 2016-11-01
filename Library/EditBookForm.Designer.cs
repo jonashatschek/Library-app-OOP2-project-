@@ -33,11 +33,11 @@
             this.editDescription_label = new System.Windows.Forms.Label();
             this.editBookIsbn_label = new System.Windows.Forms.Label();
             this.editBookTitle_label = new System.Windows.Forms.Label();
-            this.editBookAuthor_textbox = new System.Windows.Forms.TextBox();
             this.editBookIsbn_textbox = new System.Windows.Forms.TextBox();
             this.editBookTitle_textbox = new System.Windows.Forms.TextBox();
             this.saveEditedBook_btn = new System.Windows.Forms.Button();
             this.cancelEditedBook_btn = new System.Windows.Forms.Button();
+            this.editAuthors_comboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // editBookDescription_richTextBox
@@ -84,13 +84,6 @@
             this.editBookTitle_label.TabIndex = 15;
             this.editBookTitle_label.Text = "Title";
             // 
-            // editBookAuthor_textbox
-            // 
-            this.editBookAuthor_textbox.Location = new System.Drawing.Point(15, 119);
-            this.editBookAuthor_textbox.Name = "editBookAuthor_textbox";
-            this.editBookAuthor_textbox.Size = new System.Drawing.Size(314, 22);
-            this.editBookAuthor_textbox.TabIndex = 14;
-            // 
             // editBookIsbn_textbox
             // 
             this.editBookIsbn_textbox.Location = new System.Drawing.Point(15, 74);
@@ -123,11 +116,21 @@
             this.cancelEditedBook_btn.Text = "Cancel";
             this.cancelEditedBook_btn.UseVisualStyleBackColor = true;
             // 
+            // editAuthors_comboBox
+            // 
+            this.editAuthors_comboBox.FormattingEnabled = true;
+            this.editAuthors_comboBox.Location = new System.Drawing.Point(15, 119);
+            this.editAuthors_comboBox.Name = "editAuthors_comboBox";
+            this.editAuthors_comboBox.Size = new System.Drawing.Size(314, 24);
+            this.editAuthors_comboBox.TabIndex = 22;
+            this.editAuthors_comboBox.SelectedIndexChanged += new System.EventHandler(this.editAuthors_comboBox_SelectedIndexChanged);
+            // 
             // EditBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 371);
+            this.Controls.Add(this.editAuthors_comboBox);
             this.Controls.Add(this.cancelEditedBook_btn);
             this.Controls.Add(this.saveEditedBook_btn);
             this.Controls.Add(this.editBookDescription_richTextBox);
@@ -135,7 +138,6 @@
             this.Controls.Add(this.editDescription_label);
             this.Controls.Add(this.editBookIsbn_label);
             this.Controls.Add(this.editBookTitle_label);
-            this.Controls.Add(this.editBookAuthor_textbox);
             this.Controls.Add(this.editBookIsbn_textbox);
             this.Controls.Add(this.editBookTitle_textbox);
             this.Name = "EditBookForm";
@@ -153,10 +155,10 @@
         private System.Windows.Forms.Label editDescription_label;
         private System.Windows.Forms.Label editBookIsbn_label;
         private System.Windows.Forms.Label editBookTitle_label;
-        private System.Windows.Forms.TextBox editBookAuthor_textbox;
         private System.Windows.Forms.TextBox editBookIsbn_textbox;
         private System.Windows.Forms.TextBox editBookTitle_textbox;
         private System.Windows.Forms.Button saveEditedBook_btn;
         private System.Windows.Forms.Button cancelEditedBook_btn;
+        private System.Windows.Forms.ComboBox editAuthors_comboBox;
     }
 }

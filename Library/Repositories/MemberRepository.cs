@@ -18,6 +18,7 @@ namespace Library.Repositories
         public void Add(Member item)
         {
             _context.Members.Add(item);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Member> All()

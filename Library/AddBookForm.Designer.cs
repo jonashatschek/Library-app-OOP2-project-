@@ -31,12 +31,12 @@
             this.booksAdd_btn = new System.Windows.Forms.Button();
             this.addBookTitle_textbox = new System.Windows.Forms.TextBox();
             this.addBookIsbn_textbox = new System.Windows.Forms.TextBox();
-            this.addBookAuthor_textbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.addBookIsbn_label = new System.Windows.Forms.Label();
             this.description_label = new System.Windows.Forms.Label();
             this.addBookAuthor_label = new System.Windows.Forms.Label();
             this.addBookDescription_richTextBox = new System.Windows.Forms.RichTextBox();
+            this.addNewBookAllAuthors_comboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // booksAdd_btn
@@ -62,14 +62,6 @@
             this.addBookIsbn_textbox.Name = "addBookIsbn_textbox";
             this.addBookIsbn_textbox.Size = new System.Drawing.Size(314, 22);
             this.addBookIsbn_textbox.TabIndex = 4;
-            // 
-            // addBookAuthor_textbox
-            // 
-            this.addBookAuthor_textbox.Location = new System.Drawing.Point(16, 129);
-            this.addBookAuthor_textbox.Name = "addBookAuthor_textbox";
-            this.addBookAuthor_textbox.Size = new System.Drawing.Size(314, 22);
-            this.addBookAuthor_textbox.TabIndex = 6;
-            this.addBookAuthor_textbox.TextChanged += new System.EventHandler(this.addBookAuthor_textbox_TextChanged);
             // 
             // label1
             // 
@@ -115,17 +107,25 @@
             this.addBookDescription_richTextBox.TabIndex = 11;
             this.addBookDescription_richTextBox.Text = "";
             // 
+            // addNewBookAllAuthors_comboBox
+            // 
+            this.addNewBookAllAuthors_comboBox.FormattingEnabled = true;
+            this.addNewBookAllAuthors_comboBox.Location = new System.Drawing.Point(16, 130);
+            this.addNewBookAllAuthors_comboBox.Name = "addNewBookAllAuthors_comboBox";
+            this.addNewBookAllAuthors_comboBox.Size = new System.Drawing.Size(314, 24);
+            this.addNewBookAllAuthors_comboBox.TabIndex = 12;
+            // 
             // AddBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 394);
+            this.ClientSize = new System.Drawing.Size(346, 394);
+            this.Controls.Add(this.addNewBookAllAuthors_comboBox);
             this.Controls.Add(this.addBookDescription_richTextBox);
             this.Controls.Add(this.addBookAuthor_label);
             this.Controls.Add(this.description_label);
             this.Controls.Add(this.addBookIsbn_label);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.addBookAuthor_textbox);
             this.Controls.Add(this.addBookIsbn_textbox);
             this.Controls.Add(this.addBookTitle_textbox);
             this.Controls.Add(this.booksAdd_btn);
@@ -142,11 +142,11 @@
         private System.Windows.Forms.Button booksAdd_btn;
         private System.Windows.Forms.TextBox addBookTitle_textbox;
         private System.Windows.Forms.TextBox addBookIsbn_textbox;
-        private System.Windows.Forms.TextBox addBookAuthor_textbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label addBookIsbn_label;
         private System.Windows.Forms.Label description_label;
         private System.Windows.Forms.Label addBookAuthor_label;
         private System.Windows.Forms.RichTextBox addBookDescription_richTextBox;
+        private System.Windows.Forms.ComboBox addNewBookAllAuthors_comboBox;
     }
 }

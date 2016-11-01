@@ -26,7 +26,7 @@ namespace Library.Services {
             return _bookRepository.All();
         }
 
-        public void AddNewBook(string title, string isbn, string description, string authorName)
+        public Book AddNewBook(string title, string isbn, string description, string authorName)
         {
             _book.BookTitle = title;
             _book.BookIsbn = isbn;
@@ -36,7 +36,7 @@ namespace Library.Services {
 
             _bookRepository.Add(_book);
             OnUpdated();
-
+            return _book;
         }
 
         public void RemoveBook(Book book)
@@ -46,11 +46,20 @@ namespace Library.Services {
             OnUpdated();
         }
 
+        public IEnumerable<Book> FindBookByAuthor (int id)
+        {
+            return _bookRepository.FindBooksByAuthor(id);
+        }
+
         public void EditBook(Book book)
         {
             _bookRepository.Edit(book);
         }
 
+        public IEnumerable<Book> GetBookByAuthor(string authorName)
+        {
+            return _bookRepository.All().Where(b => b.BookAuthor.AuthorName == authorName);
+        }
 
         public void ListAvailableBooks()
         {
@@ -76,9 +85,9 @@ namespace Library.Services {
             }
         }
 
-        public void EditBook(int id)
+        public Book EditBook(int id)
         {
-            _bookRepository.Find(id);
+            return _bookRepository.Find(id);
         }
 
         protected virtual void OnUpdated()
