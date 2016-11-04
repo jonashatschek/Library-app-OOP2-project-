@@ -16,11 +16,20 @@ namespace Library.Services
             _memberRepository = repoFactory.GetMemberRepository();
         }
 
+        /// <summary>
+        /// calls the All-method in Member repository
+        /// </summary>
+        /// <returns>a collection of all Member type objects in database</returns>
         public IEnumerable<Member> All()
         {
             return _memberRepository.All();
         }
 
+        /// <summary>
+        /// calls the Add method in the member repository
+        /// </summary>
+        /// <param name="name">name of new member</param>
+        /// <param name="id">id of new member</param>
         public void AddNewMember(string name, string id)
         {
             member.MemberName = name;
@@ -29,7 +38,7 @@ namespace Library.Services
             _memberRepository.Add(member);
             OnUpdated();
         }
-
+        
         protected virtual void OnUpdated()
         {
             Updated?.Invoke(this, EventArgs.Empty);

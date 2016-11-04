@@ -114,6 +114,7 @@
             this.addNewBookAllAuthors_comboBox.Name = "addNewBookAllAuthors_comboBox";
             this.addNewBookAllAuthors_comboBox.Size = new System.Drawing.Size(314, 24);
             this.addNewBookAllAuthors_comboBox.TabIndex = 12;
+            this.addNewBookAllAuthors_comboBox.SelectedIndexChanged += new System.EventHandler(this.addNewBookAllAuthors_comboBox_SelectedIndexChanged);
             // 
             // AddBookForm
             // 

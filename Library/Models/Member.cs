@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Library.Models
 {
+    /// <summary>
+    /// Mamber class property declaration
+    /// </summary>
     public class Member
     {
         [Key]
@@ -14,6 +17,8 @@ namespace Library.Models
 
         [Required]
         public string MemberName { get; set; }
+
+        public double Debt { get; set; }
 
         public virtual ICollection<Loan> Loan { get; set; }
 

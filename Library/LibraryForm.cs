@@ -8,23 +8,32 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Library {
 
-    public partial class LibraryForm : Form {
+    /// <summary>
+    /// class constructor
+    /// </summary>
+    public partial class LibraryForm : Form
+    {
 
+        /// <summary>
+        /// creates objects for each service
+        /// </summary>
         private BookService _bookService;
         private BookCopyService _bookCopyService;
         private LoanService _loanService;
         private AuthorService _authorService;
         private MemberService _memberService;
 
-        public LibraryForm() {
+        public LibraryForm()
+        {
             InitializeComponent();
-            
+
             RepositoryFactory repoFactory = new RepositoryFactory();
             _bookService = new BookService(repoFactory);
             _bookCopyService = new BookCopyService(repoFactory);
@@ -78,7 +87,8 @@ namespace Library {
             }
         }
 
-        private void ListAllBooks() {
+        private void ListAllBooks()
+        {
             foreach (Book book in _bookService.All())
             {
                 books_listbox.Items.Add(book);
@@ -95,24 +105,23 @@ namespace Library {
 
         private void ListAllLoans()
         {
-            foreach (Loan loan in _loanService.All().Where(b => b.DueDate != null))
+            foreach (Loan loan in _loanService.All())
             {
-                //loans_listbox.Items.Add(loan.BookCopy.Book.BookTitle);
                 loans_listbox.Items.Add(loan);
             }
         }
 
         private void ListAllBookCopies()
         {
-            foreach (BookCopy bookCopy in _bookCopyService.All())
+            foreach (Book book in _bookService.AllBooksWithAtLeastOneCopy())
             {
-                bookCopies_listbox.Items.Add(bookCopy);
+                bookCopies_listbox.Items.Add(book);
             }
         }
 
         private void booksAdd_btn_Click(object sender, EventArgs e)
         {
-            var form = new AddBookForm(_bookService, _bookCopyService, _authorService);
+            var form = new AddBookForm(_bookService, _authorService);
             form.Show(this);
         }
 
@@ -120,6 +129,11 @@ namespace Library {
         {
             ListAllBooks();
             ListAllAuthors();
+            ListAllMembers();
+            ListAllBookCopies();
+            ListAllLoans();
+            MemberListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            MemberListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
         }
 
@@ -132,15 +146,32 @@ namespace Library {
 
         private void books_listbox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(books_listbox.SelectedItems.Count != 0) {
 
+                Book selectedBook = (Book) books_listbox.SelectedItem;
+                displayTitleBooks_textBox.Text = selectedBook.BookTitle;
+                displayAuthorBooks_textBox.Text = selectedBook.BookAuthor.AuthorName;
+                displayISBNBooks_textBox.Text = selectedBook.BookIsbn;
+
+                var availableBookCopies = _bookCopyService.AllCopiesOfSpecificBookNotOnLoan(selectedBook);
+                displayNumberOfAvailableCopies_textBox.Text = Convert.ToString(availableBookCopies.Count());
+                displayDescriptionBooks_textBox.Text = selectedBook.BookDescription;
+            }
         }
 
         private void editBook_btn_Click(object sender, EventArgs e)
         {
-            Book findBook = (Book) books_listbox.SelectedItem;
-            Book selectedBookToEdit = _bookService.EditBook(findBook.Id);
-            var form = new EditBookForm(selectedBookToEdit, _authorService);
-            form.Show(this);
+            try
+            {
+                Book findBook = (Book) books_listbox.SelectedItem;
+                Book selectedBookToEdit = _bookService.EditBook(findBook.Id);
+                var form = new EditBookForm(selectedBookToEdit, _authorService);
+                form.Show(this);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You have to select an item to edit first");
+            }
         }
 
         private void addNewAuthor_btn_Click(object sender, EventArgs e)
@@ -163,7 +194,7 @@ namespace Library {
 
         private void createNewLoan_btn_Click(object sender, EventArgs e)
         {
-            var form = new CreateLoanForms(_memberService, _loanService, _bookCopyService, _bookService);
+            var form = new CreateLoanForms(_memberService, _loanService, _bookCopyService);
             form.Show(this);
         }
 
@@ -171,13 +202,148 @@ namespace Library {
         {
             books_listbox.Items.Clear();
             Author author = (Author) filterListByAuthor_comboBox.SelectedItem;
-            foreach (Book book in _bookService.GetBookByAuthor(author.AuthorName))
+
+            foreach (Book book in _bookService.GetBookByAuthor(author.Id))
             {
                 books_listbox.Items.Add(book);
             }
         }
 
+        private void ShowAllCurrentLoans_radioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Loan loan in _loanService.All())
+            {
+                loans_listbox.Items.Add(loan);
+            }
+        }
+
+        private void ReturnSelectedBookCopy_btn_Click(object sender, EventArgs e)
+        {
+            Loan selectedLoan = (Loan) loans_listbox.SelectedItem;
+            _loanService.ReturnBookCopy(selectedLoan);
+        }
+
+        private void books_tabPage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void displayTitleBooks_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loans_listbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(loans_listbox.SelectedItems.Count != 0) {
+
+                Loan selectedItem = (Loan) loans_listbox.SelectedItem;
+                BookCopyTitleLoan_textBox.Text = selectedItem.BookCopy.Book.BookTitle;
+                AuthorNameLoan_textBox.Text = selectedItem.BookCopy.Book.BookAuthor.AuthorName;
+                MemberHavingLoan_textBox.Text = selectedItem.Member.MemberName;
+                ReturnDateLoan_texrBox.Text = selectedItem.DueDate.Date.ToShortDateString();
+
+                if (selectedItem.isOverdue)
+                {
+                    LoanStatus_textBox.Text = String.Format(@"Overdue [by {0} days]",
+                        selectedItem.TimeOfReturn.Value.Subtract(selectedItem.DueDate.Date).Days);
+
+                }
+                else if (!selectedItem.TimeOfReturn.HasValue)
+                    LoanStatus_textBox.Text = @"On loan";
+                else
+                {
+                    LoanStatus_textBox.Text = String.Format(@"Returned [{0}]", selectedItem.TimeOfReturn.Value.ToShortDateString());
+                }
+            }
+        }
+
+        private void members_listbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(members_listbox.SelectedItems.Count != 0) {
+                MemberListView.Items.Clear();
+                Member selectedItem = (Member) members_listbox.SelectedItem;
+
+                DisplayMemberNameMemberPage_textBox.Text = selectedItem.MemberName;
+                DisplayMemberPersonalId_textBox.Text = selectedItem.PersonalId;
+                DisplayMemberDept_listBox.Text = selectedItem.Debt.ToString();
+                ListViewItem lvi;
+                foreach(Loan loan in _loanService.GetAllLoansByMember(selectedItem.MemberId)) { 
+                    lvi = new ListViewItem(loan.BookCopy.Book.BookTitle);
+                    lvi.SubItems.Add(loan.BookCopy.Book.BookAuthor.AuthorName);
+                    lvi.SubItems.Add(loan.DueDate.Date.ToShortDateString());
+                    MemberListView.Items.Add(lvi);
+                }
+
+                MemberListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                MemberListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            }
+
+
+
+        }
+
+        private void MemberListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void authors_listbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(authors_listbox.SelectedItems.Count != 0) { 
+                authorsListView.Items.Clear();
+                Author author = (Author) authors_listbox.SelectedItem;
+
+                foreach (Book book in _bookService.GetBookByAuthor(author.Id))
+                {
+                    ListViewItem lvi;
+                    lvi = new ListViewItem(book.BookTitle);
+                    var availableBookCopies = _bookCopyService.AllCopiesOfSpecificBookNotOnLoan(book);
+                    lvi.SubItems.Add(Convert.ToString(availableBookCopies.Count()));
+                    lvi.SubItems.Add(book.BookIsbn);
+                    authorsListView.Items.Add(lvi);
+                }
+
+                authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            }
+
+        }
+
+        private void bookCopies_listbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Book book = (Book) bookCopies_listbox.SelectedItem;
+            AuthorNameFromBookCopy_textbox.Text = book.BookAuthor.AuthorName;
+
+            IEnumerable<BookCopy> retrievedTotalNumberOfBookCopies = _bookCopyService.GetBookCopiesByBook(book);
+            int totalNumberOfBookCopies = retrievedTotalNumberOfBookCopies.Count();
+            TotalNumberOfCopies_textbox.Text = Convert.ToString(totalNumberOfBookCopies);
+
+            IEnumerable<BookCopy> retrievedBookCopiesNotOnLoan = _bookCopyService.AllCopiesOfSpecificBookNotOnLoan(book);
+            int numberOfBookCopiesNotOnLoan = retrievedBookCopiesNotOnLoan.Count();
+            AmountOfCopiesInStore_textBox.Text = Convert.ToString(numberOfBookCopiesNotOnLoan);
+
+            AmountOfCopiesOnLoan_textbox.Text = Convert.ToString(totalNumberOfBookCopies - numberOfBookCopiesNotOnLoan);
+        }
     }
-
-
 }
+
+
+

@@ -17,6 +17,10 @@ namespace Library.Repositories
             _context = ctx;
         }
 
+        /// <summary>
+        /// adds an item to database
+        /// </summary>
+        /// <param name="item">item to add into database</param>
         public void Add(BookCopy item)
         {
             try
@@ -38,11 +42,19 @@ namespace Library.Repositories
             }
         }
 
+        /// <summary>
+        /// gets all BookCopy type items in database
+        /// </summary>
+        /// <returns>all BookCopy type items currently in database</returns>
         public IEnumerable<BookCopy> All()
         {
             return _context.BookCopies.ToList();
         }
 
+        /// <summary>
+        /// Edits an BookCopy type object in database
+        /// </summary>
+        /// <param name="item">BookCopy object to edit</param>
         public void Edit(BookCopy item)
         {
             var query = from b in _context.BookCopies
@@ -59,16 +71,37 @@ namespace Library.Repositories
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Finds and retrieves an BookCopy object in the database
+        /// </summary>
+        /// <param name="id">Id of object</param>
+        /// <returns>retrieved BookCopy object from database</returns>
         public BookCopy Find(int id)
         {
             return _context.BookCopies.Find(id);
         }
 
+        /// <summary>
+        /// Removes an BookCopy object from the database
+        /// </summary>
+        /// <param name="item">BookCopy object to remove</param>
         public void Remove(BookCopy item)
         {
             _context.BookCopies.Remove(item);
 
             _context.SaveChanges();
         }
+
+        /// <summary>
+        /// Get a selection of BookCopy objects by their book id
+        /// </summary>
+        /// <param name="id">id number</param>
+        /// <returns>a collection of BookCopy objects</returns>
+        public IEnumerable<BookCopy> GetBookCopiesByBookId(int id)
+        {
+            return All().Where(b => b.Book.Id == id);
+
+        }
+
     }
 }

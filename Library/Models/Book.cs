@@ -7,7 +7,9 @@ using System.Windows.Forms;
 
 namespace Library.Models
 {
-
+    /// <summary>
+    /// Book class property declaration
+    /// </summary>
     public class Book
     {
         [Key]

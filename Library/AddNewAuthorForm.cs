@@ -11,6 +11,9 @@ using Library.Services;
 
 namespace Library
 {
+    /// <summary>
+    /// class for adding new authors to the database
+    /// </summary>
     public partial class AddNewAuthorForm : Form
     {
         private AuthorService _authorService;
@@ -26,6 +29,11 @@ namespace Library
 
         }
 
+        /// <summary>
+        /// get the name of the author and sends it to authorservice on button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addNewAuthor_btn_Click(object sender, EventArgs e)
         {
             _authorService.AddNewAuthor(addNewAuthor_textbox.Text);

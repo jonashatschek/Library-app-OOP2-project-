@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Library.Models
 {
+    /// <summary>
+    /// BookCopy class property declaration
+    /// </summary>
     public class BookCopy
     {
         [Key]

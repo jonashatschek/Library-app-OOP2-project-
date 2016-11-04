@@ -93,6 +93,7 @@
             this.doneNewBookCopy_btn.TabIndex = 5;
             this.doneNewBookCopy_btn.Text = "Done";
             this.doneNewBookCopy_btn.UseVisualStyleBackColor = true;
+            this.doneNewBookCopy_btn.Click += new System.EventHandler(this.doneNewBookCopy_btn_Click);
             // 
             // currentBookCopies_label
             // 

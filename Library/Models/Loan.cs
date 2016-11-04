@@ -1,18 +1,22 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace Library.Models
 {
+    /// <summary>
+    /// Loan class property declaration
+    /// </summary>
     public class Loan
     {
         [Key]
         public int LoanId { get; set; }
 
         [Required]
-        public DateTime? TimeOfLoan { get; set; }
+        public DateTime TimeOfLoan { get; set; }
 
         [Required]
-        public DateTime? DueDate { get; set; }
+        public DateTime DueDate { get; set; }
 
         public DateTime? TimeOfReturn { get; set; }
 
@@ -20,10 +24,12 @@ namespace Library.Models
 
         public virtual Member Member { get; set; }
 
+        public bool isOverdue { get; set; }
+
         public override string ToString()
         {
-            Convert.ToString(DueDate);
-                return String.Format("[{0}] -- {1}" + " [Loaned until {3}]", this.BookCopy.BookCopyId, this.BookCopy.Book.BookTitle, this.DueDate.Value);
+            
+            return String.Format("[{0}] -- {1}", this.BookCopy.BookCopyId, this.BookCopy.Book.BookTitle);
         }
 
     }

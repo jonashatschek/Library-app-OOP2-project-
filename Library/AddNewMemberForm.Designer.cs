@@ -54,6 +54,7 @@
             this.addNewMemberCancel_btn.TabIndex = 1;
             this.addNewMemberCancel_btn.Text = "Cancel";
             this.addNewMemberCancel_btn.UseVisualStyleBackColor = true;
+            this.addNewMemberCancel_btn.Click += new System.EventHandler(this.addNewMemberCancel_btn_Click);
             // 
             // addNewMemberName_textbox
             // 

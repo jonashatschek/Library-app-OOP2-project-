@@ -18,14 +18,21 @@ namespace Library.Services
             _authorRepository = repoFactory.GetAuthorRepository();
         }
 
+        /// <summary>
+        /// calls the All-method in Author repository
+        /// </summary>
+        /// <returns>a collection of all Author type objects in database</returns>
         public IEnumerable<Author> All()
         {
             return _authorRepository.All();
         }
 
+        /// <summary>
+        /// calls the Add method in the Author repository sending in a new object
+        /// </summary>
+        /// <param name="name">author name</param>
         public void AddNewAuthor(string name)
         {
-            //needs some more variables.
             _author.AuthorName = name;
             _authorRepository.Add(_author);
 

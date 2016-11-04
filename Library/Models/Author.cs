@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Library.Models
 {
+    /// <summary>
+    /// Author class property declaration
+    /// </summary>
     public class Author
     {
         [Key]

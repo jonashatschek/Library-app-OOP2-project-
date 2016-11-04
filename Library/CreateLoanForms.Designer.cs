@@ -89,6 +89,7 @@
             this.cancelLoan_btn.TabIndex = 6;
             this.cancelLoan_btn.Text = "Cancel";
             this.cancelLoan_btn.UseVisualStyleBackColor = true;
+            this.cancelLoan_btn.Click += new System.EventHandler(this.cancelLoan_btn_Click);
             // 
             // createLoan_btn
             // 
