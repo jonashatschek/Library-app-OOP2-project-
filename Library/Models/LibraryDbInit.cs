@@ -15,7 +15,7 @@ namespace Library.Models {
 
             Member sampleMember = new Member()
             {
-                MemberName = "SampleMafk",
+                MemberName = "SampleUser",
                 PersonalId = "8905091129"
             };
 
